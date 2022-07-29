@@ -111,7 +111,7 @@ giveBookByName(bookName){
             return null;
     }
 }
-} 
+}
 
 
 
@@ -120,15 +120,92 @@ class Student {
         this.name = name;
         this.gender = gender;
         this.age = age;
+        this.marks = {};
     }
 
 
 setSubject(subjectName){
     this.subject = subjectName;
+    
   }
 
 
-  addMark(mark) {
+    addMark(mark, subject){  /*оценка, предмет*/
+     
+       if (this.marks[subject] === undefined ) { 
+        this.marks[subject] = [mark]
+    }
+else {
+    this.marks[subject].push(mark);
+}
+};
+
+
+
+getAverageBySubject(subject) {
+    if(this.marks[subject].length > 0){
+    return this.marks[subject].reduce((acc, mark, idx, arr) => {
+      if (idx === arr.length - 1){
+        return (acc+mark)/arr.length;
+      } else {
+        return acc + mark;
+      }
+    }    
+   )
+ }
+
+else {
+    throw new Error('По этому предмету нет оценок');
+}
+}
+  
+
+ 
+ getAverage() {
+averageRating =[];
+    for (subj in this.marks){
+       averageRating.push(...this.marks[subj])
+    }
+    array_sum(averageRating); // 15
+   /*let s; 
+    for (let i = 0; i < averageRating.length; i++){
+       s += averageRating[i]
+     }
+     return s/averageRating.length;*/
+}
+}
+   /* if(this.marks.length > 0){
+            return this.marks.reduce((acc, mark, idx, arr) => {
+                        if (idx === arr.length - 1){
+                        return (acc+mark)/arr.length;
+                    } else {
+                         return acc + mark;
+                        }
+                }     
+                 )
+        } else {
+            throw new Error('Нет оценок');
+                }
+}
+}*/
+/*
+        if(this.mark === undefined){ 
+  
+    this.mark = [subject];
+  } else {
+      
+    this.mark.push(subject);
+  }
+};
+}
+
+
+}
+*/
+
+    /*
+    
+    subjectName
     if(this.marks === undefined){ 
         this.marks = [mark];
       } else {
@@ -185,3 +262,4 @@ setSubject(subjectName){
     };
 }
 
+*/
